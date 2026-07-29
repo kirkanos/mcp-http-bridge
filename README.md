@@ -1,5 +1,7 @@
 # mcp-http-bridge
 
+[![CI](https://github.com/kirkanos/mcp-http-bridge/actions/workflows/ci.yml/badge.svg)](https://github.com/kirkanos/mcp-http-bridge/actions/workflows/ci.yml)
+
 A single-binary bridge that lets an MCP client which only speaks **stdio** talk to a
 remote **Streamable HTTP** MCP server.
 
@@ -106,3 +108,7 @@ Diagnostics go to stderr, which MCP clients typically capture in their logs.
   error is passed through to the client.
 - No retries. A failed request surfaces as an error rather than being repeated, since
   MCP requests are not generally idempotent.
+
+## License
+
+[MIT](LICENSE)
