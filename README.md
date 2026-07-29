@@ -25,6 +25,22 @@ and a URL that embeds an API key never leaves your device.
 
 ## Install
 
+Download a prebuilt archive from the
+[latest release](https://github.com/kirkanos/mcp-http-bridge/releases/latest) —
+macOS and Linux (arm64/amd64) and Windows (amd64):
+
+```sh
+tar -xzf mcp-http-bridge_*_darwin_arm64.tar.gz
+install -m 755 mcp-http-bridge ~/.local/bin/
+mcp-http-bridge -version
+```
+
+Each release ships a `SHA256SUMS` file; verify with `shasum -a 256 -c SHA256SUMS`.
+On macOS, Gatekeeper may quarantine the downloaded binary because it is unsigned —
+clear it with `xattr -d com.apple.quarantine mcp-http-bridge`.
+
+With a Go toolchain:
+
 ```sh
 go install github.com/kirkanos/mcp-http-bridge@latest
 ```
@@ -34,6 +50,18 @@ Or build from a checkout:
 ```sh
 go build -o ~/.local/bin/mcp-http-bridge .
 ```
+
+## Release
+
+Tagging is what publishes a release; the workflow builds every target and uploads the
+archives:
+
+```sh
+git tag v0.2.0
+git push origin v0.2.0
+```
+
+`./scripts/build-release.sh v0.2.0` produces the same archives locally in `dist/`.
 
 ## Usage
 

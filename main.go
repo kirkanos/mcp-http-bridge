@@ -23,6 +23,10 @@ import (
 	"time"
 )
 
+// version is set at build time via -ldflags "-X main.version=..." and stays
+// "dev" for local builds.
+var version = "dev"
+
 var (
 	stdout   = bufio.NewWriter(os.Stdout)
 	stdoutMu sync.Mutex
@@ -65,6 +69,12 @@ func main() {
 	args := os.Args[1:]
 	for i := 0; i < len(args); i++ {
 		switch args[i] {
+		case "-version", "--version":
+			fmt.Println(version)
+			return
+		case "-h", "--help":
+			fmt.Println("usage: mcp-http-bridge <url> [-H \"Header: value\"]...")
+			return
 		case "-H", "--header":
 			if i+1 >= len(args) {
 				logf("missing value after %s", args[i])
