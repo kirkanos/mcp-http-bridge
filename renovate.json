@@ -1,45 +1,7 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": [
-    ":separateMajorReleases",
-    ":separateMultipleMajorReleases",
-    ":separateMultipleMinorReleases",
-    "config:recommended"
-  ],
-  "assignees": ["kirkanos"],
-  "customManagers": [
-    {
-      "customType": "regex",
-      "description": "Track Docker images used in Woodpecker pipeline files",
-      "fileMatch": [
-        "(^|/)\\.woodpecker/.*\\.ya?ml$"
-      ],
-      "matchStrings": [
-        "image:\\s+(?<depName>[^\\s:]+(?:/[^\\s:]+)+):(?<currentValue>[^\\s]+)"
-      ],
-      "datasourceTemplate": "docker"
-    }
-  ],
-  "packageRules": [
-    {
-      "description": "Group updates for pipeline runtime image",
-      "matchManagers": [
-        "custom.regex"
-      ],
-      "matchPackageNames": [
-        "registry.kirkanos.net/images/ci-build"
-      ],
-      "groupName": "woodpecker ci-build image"
-    },
-    {
-      "description": "Group updates for Hugo image",
-      "matchManagers": [
-        "custom.regex"
-      ],
-      "matchPackageNames": [
-        "klakegg/hugo"
-      ],
-      "groupName": "woodpecker hugo image"
-    }
+    "github>kirkanos/renovate-config",
+    ":pinGitHubActionDigests"
   ]
 }
